@@ -6,7 +6,7 @@
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
-                <CForm>
+                <CForm @submit.prevent="login">
                   <h1>Login</h1>
                   <p class="text-medium-emphasis">Sign In to your account</p>
                   <CInputGroup class="mb-3">
@@ -14,8 +14,9 @@
                       <CIcon icon="cil-user" />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Username"
-                      autocomplete="username"
+                      placeholder="Email"
+                      v-model="userData.email"
+                      autocomplete="Email"
                     />
                   </CInputGroup>
                   <CInputGroup class="mb-4">
@@ -24,19 +25,22 @@
                     </CInputGroupText>
                     <CFormInput
                       type="password"
+                      v-model="userData.password"
                       placeholder="Password"
                       autocomplete="current-password"
                     />
                   </CInputGroup>
                   <CRow>
                     <CCol :xs="6">
-                      <CButton color="primary" class="px-4"> Login </CButton>
+                      <CButton color="primary" type="submit" class="px-4">
+                        Login
+                      </CButton>
                     </CCol>
-                    <CCol :xs="6" class="text-right">
+                    <!-- <CCol :xs="6" class="text-right">
                       <CButton color="link" class="px-0">
                         Forgot password?
                       </CButton>
-                    </CCol>
+                    </CCol> -->
                   </CRow>
                 </CForm>
               </CCardBody>
@@ -45,14 +49,14 @@
               <CCardBody class="text-center">
                 <div>
                   <h2>Sign up</h2>
-                  <p>
+                  <!-- <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua.
                   </p>
                   <CButton color="light" variant="outline" class="mt-3">
                     Register Now!
-                  </CButton>
+                  </CButton> -->
                 </div>
               </CCardBody>
             </CCard>
@@ -64,7 +68,28 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Login',
+  data() {
+    return {
+      userData: {
+        email: null,
+        password: null,
+      },
+      isLoading: false,
+    }
+  },
+  methods: {
+    login() {
+      this.isLoading = true
+      axios
+        .post('http://localhost:3000/logIn', this.userData)
+        .then((res) => {
+          this.isLoading = false
+        })
+        .catch((err) => {})
+    },
+  },
 }
 </script>
