@@ -39,6 +39,7 @@
                         
                       </CButton>
                     </CCol>
+                    <CAlert  v-if="showErrorMessageIsNotAllawed" class="m-2 mt-3" color="warning">You are not allawed to login here</CAlert>
                     <CAlert v-if="showErrorMessage" class="m-2 mt-3" color="danger">Email or Password is wrong!</CAlert>
                     <!-- <CCol :xs="6" class="text-right">
                       <CButton color="link" class="px-0">
@@ -73,6 +74,7 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 export default {
   name: 'Login',
   data() {
@@ -83,12 +85,14 @@ export default {
       },
       isLoading: false,
       showErrorMessage:false,
+      showErrorMessageIsNotAllawed:false
     }
   },
   methods: {
     login() {
       this.isLoading = true;
       this.showErrorMessage = false;
+      this.showErrorMessageIsNotAllawed = false;
       axios
         .post('http://localhost:3000/logIn', this.userData)
         .then((res) => {
@@ -96,7 +100,14 @@ export default {
           localStorage.setItem('token',res.data.token)
           localStorage.setItem('email',this.userData.email)
           this.$store.dispatch('login', res.data.token)
-          this.$router.push('/posts/list')
+
+          let decoded = jwt_decode(res.data.token);
+          if(decoded.role == 'admin') {
+            this.$router.push('/posts/list')
+          } else {
+            this.showErrorMessageIsNotAllawed = true
+          }
+          
         })
         .catch(() => {
           this.isLoading = false;

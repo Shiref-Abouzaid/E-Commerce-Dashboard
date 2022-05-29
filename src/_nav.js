@@ -10,12 +10,12 @@ export default [
   //   },
   // },
 
-  // {
-  //   component: 'CNavItem',
-  //   name: 'Create User',
-  //   to: '/users/create',
-  //   icon: 'cil-user',
-  // },
+  {
+    component: 'CNavItem',
+    name: 'Create User',
+    to: '/users/create',
+    icon: 'cil-user',
+  },
   {
     component: 'CNavItem',
     name: 'Posts',
