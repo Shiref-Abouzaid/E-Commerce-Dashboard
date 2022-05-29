@@ -15,7 +15,7 @@
         <tr v-for="post in posts" :key="post._id">
           <td scope="row">{{ post.postTitle }}</td>
           <td>{{ post.postDescription }}</td>
-          <td>{{ post.postStatus }}</td>
+          <td><span class="text-warning ">{{ post.postStatus }}</span></td>
           <td class="action">
             <div>
               <button

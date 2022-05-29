@@ -1,6 +1,6 @@
 <template>
   <div>
-    <WidgetsStatsA />
+
     <CRow>
       <CCol :md="12">
         <CCard class="mb-4">
@@ -89,7 +89,7 @@
         </CCard>
       </CCol>
     </CRow>
-    <WidgetsStatsD />
+
     <CRow>
       <CCol :md="12">
         <CCard class="mb-4">
@@ -276,15 +276,12 @@ import avatar4 from '@/assets/images/avatars/4.jpg'
 import avatar5 from '@/assets/images/avatars/5.jpg'
 import avatar6 from '@/assets/images/avatars/6.jpg'
 
-import WidgetsStatsA from './widgets/WidgetsStatsTypeA.vue'
-import WidgetsStatsD from './widgets/WidgetsStatsTypeD.vue'
+
+
 
 export default {
   name: 'Dashboard',
-  components: {
-    WidgetsStatsA,
-    WidgetsStatsD,
-  },
+
   setup() {
     const progressGroupExample1 = [
       { title: 'Monday', value1: 34, value2: 78 },
