@@ -213,4 +213,7 @@ export default {
 .action {
   width: 16rem;
 }
+.table {
+  background-color:#FFF;
+}
 </style>
