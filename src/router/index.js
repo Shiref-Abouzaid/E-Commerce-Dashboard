@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: DefaultLayout,
-    // redirect: '/dashboard',
+    redirect: '/posts/list',
     beforeEnter: (to, from, next) => { 
       if (localStorage.getItem('token') == null) {
         next('/pages/login');
