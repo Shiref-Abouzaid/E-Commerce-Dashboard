@@ -94,6 +94,8 @@ export default {
         .then((res) => {
           this.isLoading = false;
           localStorage.setItem('token',res.data.token)
+          this.$store.dispatch('login', res.data.token)
+          this.$router.push('/posts/list')
         })
         .catch(() => {
           this.isLoading = false;

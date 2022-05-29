@@ -1,7 +1,8 @@
 import { createStore } from 'vuex'
-
+import axios from 'axios'
 export default createStore({
   state: {
+    token:localStorage.getItem('token')?localStorage.getItem('token'):null,
     sidebarVisible: '',
     sidebarUnfoldable: false,
   },
@@ -15,7 +16,17 @@ export default createStore({
     updateSidebarVisible(state, payload) {
       state.sidebarVisible = payload.value
     },
+    setToken(state, token) {
+
+      state.token = token;
+
+    },
   },
-  actions: {},
+  actions: {
+    login(vuexContext, token) {
+      vuexContext.commit('setToken', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    },
+  },
   modules: {},
 })

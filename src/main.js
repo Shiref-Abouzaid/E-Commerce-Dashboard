@@ -11,7 +11,7 @@ import axios from 'axios'
 
 let token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 axios.defaults.baseURL = 'http://localhost:3000'
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`
 const app = createApp(App)
 app.use(store)
 app.use(router)

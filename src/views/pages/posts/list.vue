@@ -17,7 +17,7 @@
           <td class="action">
             <div>
                 <button class="btn btn-success text-light btn-sm"  @click="showAcceptModal(post._id)">Accept</button>
-                <button class="btn btn-danger text-light btn-sm m-2 mt-0 mb-0">Dicline</button>
+                <button class="btn btn-danger text-light btn-sm m-2 mt-0 mb-0" @click="showRejectModal(post._id)">Decline</button>
                 <button class="btn btn-info text-light btn-sm">Details</button>
             </div>
           </td>
@@ -41,6 +41,23 @@
     </CModalFooter>
   </CModal>
 
+  <CModal alignment="center" :visible="rejectModal" @close="() => { rejectModal = false }">
+    <CModalHeader>
+      <CModalTitle>Decline the post</CModalTitle>
+    </CModalHeader>
+    <CModalBody>Are you sure you want to decline the post?</CModalBody>
+    <CModalFooter>
+        <CButton color="success" :disabled="isLoading" class="text-light" @click="rejectPost">
+            <span v-if="!isLoading">Reject</span>
+            <CSpinner v-else color="white" ></CSpinner>
+        </CButton>
+      <CButton color="danger" class="text-light" @click="() => { rejectModal = false }">
+        No
+      </CButton>
+      
+    </CModalFooter>
+  </CModal>
+
   </div>
 </template>
 <script>
@@ -49,22 +66,36 @@ export default {
   data() {
     return {
         acceptModal:false,
+        rejectModal:false,
         posts: [],
         idOfSelectedPost:null,
         isLoading:false,
     };
   },
   methods: {
+      rejectPost() {
+        this.isLoading = true;
+        axios.put(`/declinePost/${this.idOfSelectedPost}`).then(res=>{
+            this.rejectModal = false;
+            this.getPosts();
+        })
+        this.isLoading = false;
+      },
     acceptPost() {
         this.isLoading = true;
         axios.put(`/approvePost/${this.idOfSelectedPost}`).then(res=>{
-            this.isLoading = false;
             this.acceptModal = false;
+            this.getPosts();
         })
+        this.isLoading = false;
     },
     showAcceptModal(id) {
         this.idOfSelectedPost = id;
         this.acceptModal = true;
+    },
+    showRejectModal(id) {
+        this.idOfSelectedPost = id;
+        this.rejectModal = true;
     },
     getPosts() {
       axios.get("/getAllPendingPosts").then((res) => {
@@ -74,6 +105,7 @@ export default {
   },
   mounted() {
     this.getPosts();
+
   },
 };
 </script>
