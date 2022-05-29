@@ -94,6 +94,7 @@ export default {
         .then((res) => {
           this.isLoading = false;
           localStorage.setItem('token',res.data.token)
+          localStorage.setItem('email',this.userData.email)
           this.$store.dispatch('login', res.data.token)
           this.$router.push('/posts/list')
         })

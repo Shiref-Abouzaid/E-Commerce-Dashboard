@@ -23,7 +23,7 @@ export default {
     const getBreadcrumbs = () => {
       return router.currentRoute.value.matched.map((route) => {
         return {
-          active: route.path === router.currentRoute.value.fullPath,
+          active: true,
           name: route.name,
           path: `${router.options.history.base}${route.path}`,
         }

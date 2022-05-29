@@ -1,37 +1,40 @@
 <template>
-
   <CDropdown variant="btn-group">
-  
     <CDropdownToggle placement="bottom-end" class="py-0" :caret="false">
       <CAvatar :src="avatar" size="md" />
- 
+      <div>
+        {{email}}
+      </div>
     </CDropdownToggle>
+
     <CDropdownMenu class="pt-0">
       <CDropdownHeader component="h6" class="bg-light fw-semibold py-2">
         Account
       </CDropdownHeader>
 
-
-      <CDropdownItem @click="logout"> <CIcon icon="cil-lock-locked" /> Logout </CDropdownItem>
+      <CDropdownItem @click="logout">
+        <CIcon icon="cil-lock-locked" /> Logout
+      </CDropdownItem>
     </CDropdownMenu>
   </CDropdown>
 </template>
 
 <script>
-import avatar from '@/assets/images/avatars/avatar9.png'
+import avatar from "@/assets/images/avatars/avatar9.png";
 export default {
-  name: 'AppHeaderDropdownAccnt',
+  name: "AppHeaderDropdownAccnt",
   setup() {
     return {
       avatar: avatar,
       itemsCount: 42,
-    }
+      email:localStorage.getItem('email') ? localStorage.getItem('email') : null
+    };
   },
-  methods:{
+  methods: {
     logout() {
-      localStorage.removeItem('token')
-      this.$router.push('/pages/login')
-    }
-  }
-}
+      localStorage.removeItem("token");
+      this.$router.push("/pages/login");
+    },
+  },
+};
 </script>
