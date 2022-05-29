@@ -19,7 +19,7 @@ export default [
   {
     component: 'CNavItem',
     name: 'Posts',
-    to: '/theme/typography',
+    to: '/posts/list',
     icon: 'cil-pencil',
   },
   {
@@ -33,6 +33,7 @@ export default [
         name: 'Login',
         to: '/pages/login',
       },
+
       {
         component: 'CNavItem',
         name: 'Register',

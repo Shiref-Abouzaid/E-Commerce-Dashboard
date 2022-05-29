@@ -7,7 +7,11 @@ import CIcon from '@coreui/icons-vue'
 import { iconsSet as icons } from '@/assets/icons'
 import DocsCallout from '@/components/DocsCallout'
 import DocsExample from '@/components/DocsExample'
+import axios from 'axios'
 
+let token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 const app = createApp(App)
 app.use(store)
 app.use(router)
