@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>create user</h1>
+    <h1>Create user</h1>
     <CForm @submit.prevent="createUser">
       <CRow>
         <CCol :sm="6">
@@ -25,13 +25,14 @@
         <CCol :sm="6">
           <CInputGroup class="mb-3">
             <CInputGroupText class="input-text">Age</CInputGroupText>
-            <CFormInput placeholder="Age" v-model="userData.age" type="text" />
+            <CFormInput placeholder="Age" v-model="userData.age" type="number" />
           </CInputGroup>
         </CCol>
         <CCol :sm="6">
           <CInputGroup class="mb-3">
             <CInputGroupText class="input-text">National ID</CInputGroupText>
             <CFormInput placeholder="National ID" v-model="userData.nationalID" type="text" />
+            <div class="w-100 text form-text"> 14 digits </div>
           </CInputGroup>
         </CCol>
         <CCol :sm="6">
@@ -72,10 +73,10 @@ export default {
       isLoading: false,
       userData: {
         "email": "",
-        "password": "abcdefgH!5",
+        "password": "",
         "userName": "",
         "age": '',
-        "nationalID": 91825643670115,
+        "nationalID":'',
         "role": ""
       }
     }
@@ -89,10 +90,10 @@ export default {
 
         this.userData = {
         "email": "",
-        "password": "abcdefgH!5",
+        "password": "",
         "userName": "",
         "age": '',
-        "nationalID": 91825643670115,
+        "nationalID": '',
         "role": ""
       }
       })
